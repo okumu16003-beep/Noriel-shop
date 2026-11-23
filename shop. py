@@ -1,0 +1,73 @@
+print("=== Welcome to Noriel's Shop ===")
+print("Karibu Sana!\n")
+
+# Price list
+items = ["Milk 1L - Ksh 120", "Bread - Ksh 80", "Sugar 2kg - Ksh 320",
+         "Rice 2kg - Ksh 380", "Oil 1L - Ksh 350", "Soap - Ksh 100"," Chapati-60"]
+prices = [120, 80, 320, 380, 350, 100,60]
+
+cart = []
+total = 0
+
+while True:
+    print("\n--- ITEMS ---")
+    for i in range(len(items)):
+        print(f"{i+1}. {items[i]}")
+
+    print("\n1. Add to cart")
+    print("2. View cart")
+    print("3. Checkout")
+    print("4. Exit")
+
+    choice = input("Choose 1-4: ")
+
+    if choice == "1":
+        try:
+            num = int(input("Enter item number 1-7: "))
+            if 1 <= num <= 7:
+                qty = int(input("How many? "))
+                cost = prices[num-1] * qty
+                cart.append(f"{items[num-1]} x {qty} = Ksh {cost}")
+                total += cost
+                print(f"Added! Total now Ksh {total}")
+            else:
+                print("Choose 1 to 7 only")
+        except:
+            print("Please type numbers only!")
+
+    elif choice == "2":
+        if len(cart) == 0:
+            print("Cart is empty!")
+        else:
+            print("\n--- YOUR CART ---")
+            for c in cart:
+                print(c)
+            print(f"TOTAL = Ksh {total}")
+
+    elif choice == "3":
+        if len(cart) == 0:
+            print("Cart empty, add items first!")
+        else:
+            print("\n--- RECEIPT ---")
+            for c in cart:
+                print(c)
+            print(f"TOTAL TO PAY = Ksh {total}")
+            print("1. Cash  2. M-Pesa")
+            pay = input("Choose 1 or 2: ")
+            if pay == "1":
+                print("Paid by Cash. Asante!")
+            elif pay == "2":
+                phone = input("Enter M-Pesa number: ")
+                print(f"M-Pesa prompt sent to {phone}")
+                print("Payment successful!")
+            else:
+                print("Invalid payment")
+            cart = []
+            total = 0
+            print("New customer, cart cleared!")
+
+    elif choice == "4":
+        print("Thank you for shopping! Bye!")
+        break
+    else:
+        print("Choose 1, 2, 3 or 4")
